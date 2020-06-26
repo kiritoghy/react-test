@@ -51,7 +51,7 @@ class App extends Component{
       }}>
         <Row gutter={[16,16]}>
           <Col span={12} offset={6}>
-              <Title className="App">
+              <Title className="App" level={2}>
                 签到转换 
               </Title>
           </Col>
@@ -63,7 +63,7 @@ class App extends Component{
             allowClear
             placeholder="请输入签到的人员"
             onChange = {this.onChange}
-            value={this.state.value}
+            autoSize={{ minRows: 15, maxRows: 15 }}
             />
           </Col>
         </Row>
@@ -78,9 +78,9 @@ class App extends Component{
             rows={15} 
             allowClear
             placeholder="转换结果将在此显示"
-            onChange = {this.onChange}
             value={this.state.result}
             onChange = {this.onChange2}
+            autoSize={{ minRows: 15, maxRows: 15 }}
             />
           </Col>
         </Row>
