@@ -1,26 +1,92 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Row, Col, Input, Button, message, Typography  } from 'antd';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const {TextArea} = Input;
+const { Title } = Typography;
+
+class App extends Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      value:'',
+      result:''
+    }
+  }
+
+  onChange = (e) => {
+    if(e && e.target && e.target.value){
+      this.setState({
+        value:e.target.value
+      })
+    }
+  }
+  onChange2 = (e) => {
+    if(e && e.target && e.target.value){
+      this.setState({
+        result:e.target.value
+      })
+    }
+  }
+
+  onClick = () =>{
+    let strings = this.state.value.split('\n')
+    console.log(strings)
+    let info = '';
+    let index = 1;
+    for(let i = 0; i < strings.length; ++i){
+      if(strings[i].length > 0 && strings[i].length < 10){
+        info += index.toString() + "、" + strings[i] + '\n';
+        index++;
+      }
+    }
+    this.setState({result:info})
+    message.success('转换成功')
+  }
+
+  render() {
+    return(
+      <div style={{
+        textAlign: "left",
+      }}>
+        <Row gutter={[16,16]}>
+          <Col span={12} offset={6}>
+              <Title className="App">
+                签到转换 
+              </Title>
+          </Col>
+        </Row>
+        <Row gutter={[16,16]}>
+          <Col span={12} offset={6}>
+            <TextArea 
+            rows={15} 
+            allowClear
+            placeholder="请输入签到的人员"
+            onChange = {this.onChange}
+            />
+          </Col>
+        </Row>
+        <Row gutter={[16,16]}>
+          <Col span={12} offset={6}>
+              <Button type="primary" onClick={this.onClick}>转换</Button>
+          </Col>
+        </Row>
+        <Row gutter={[16,16]}>
+          <Col span={12} offset={6}>
+            <TextArea 
+            rows={15} 
+            allowClear
+            placeholder="转换结果将在此显示"
+            onChange = {this.onChange}
+            value={this.state.result}
+            onChange = {this.onChange2}
+            />
+          </Col>
+        </Row>
+        
+      </div>
+    )
+  }
 }
 
 export default App;
