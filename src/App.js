@@ -63,6 +63,7 @@ class App extends Component{
             allowClear
             placeholder="请输入签到的人员"
             onChange = {this.onChange}
+            value={this.state.value}
             />
           </Col>
         </Row>
